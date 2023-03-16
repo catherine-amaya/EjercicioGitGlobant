@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Miembro</name>
         <label>Miembro</label>
-        <locationX>176</locationX>
-        <locationY>335</locationY>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
         <actionName>CollaborationGroup.NewGroupMember</actionName>
         <actionType>quickAction</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -22,6 +22,28 @@
         </inputParameters>
     </actionCalls>
     <apiVersion>57.0</apiVersion>
+    <decisions>
+        <name>Si_es_contacto</name>
+        <label>Si es contacto</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Resultado predeterminado</defaultConnectorLabel>
+        <rules>
+            <name>Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Profile.Description</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Miembro</targetReference>
+            </connector>
+            <label>Si</label>
+        </rules>
+    </decisions>
     <environments>Default</environments>
     <interviewLabel>Flujo de Contacto {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Flujo de Contacto</label>
@@ -45,10 +67,10 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>50</locationX>
+        <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Miembro</targetReference>
+            <targetReference>Si_es_contacto</targetReference>
         </connector>
         <object>Contact</object>
         <recordTriggerType>Create</recordTriggerType>
